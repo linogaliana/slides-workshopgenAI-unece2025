@@ -1,0 +1,334 @@
+---
+title: "Les API"
+subtitle: |
+  **[Atelier du `SSPHub` #1]{.orange}**
+author:
+  - name: "[Lino Galiana](https://www.linogaliana.fr/)"
+    affiliations:
+        - name: "Insee"
+date: 2025-04-09
+date-format: short
+slide-number: true
+footer: |
+  **Les ateliers du `SSPHub`**
+lang: fr-FR
+slide-tone: true
+format:
+  onyxia-revealjs
+from: markdown+emoji
+image: https://minio.lab.sspcloud.fr/lgaliana/generative-art/pythonds/serveurpython.jpg
+---
+
+
+# Introduction
+
+## Qu'est-ce qu'une API ?
+
+<br>
+
+::: {style="font-size: 70%"}
+
+> [Une Application programming interface ou « interface de programmation d’application ») est une interface logicielle qui permet de « connecter » un logiciel ou un service à un autre logiciel ou service afin d’échanger des données et des fonctionnalités.]{.smaller}
+>
+> [CNIL](https://www.cnil.fr/fr/definition/interface-de-programmation-dapplication-api)
+
+:::
+
+
+- Définition peu informative:
+    - `Python`, `scikit-learn`, `Docker`, etc. sont des APIs
+    - En pratique, on signifie généralement une [**API REST**]{.blue2}
+
+
+## Les APIs REST
+
+<br>
+
+- [**API RESTful**]{.orange} : API conforme au style d'architecture [REST](https://fr.wikipedia.org/wiki/Representational_state_transfer)
+    - Communication via le [**protocole HTTP**]{.blue2}
+
+. . .
+
+- En pratique :
+    - On accède à un [**endpoint**]{.blue2} (ex : [l'API de la BAN](https://api-adresse.data.gouv.fr/search/))
+    - Avec des [**requêtes HTTP**]{.blue2} (`GET`, `POST`, etc.) (ex : [rues contenant "comédie"](https://api-adresse.data.gouv.fr/search/?q=comédie&type=street))
+
+
+## Analogie avec un restaurant {.smaller}
+
+<br>
+
+- 💬 __[Vous passez commande]{.orange}__
+    - Requête avec paramètres depuis {{< fa brands python >}}, {{< fa brands r-project >}}, votre navigateur...
+
+. . .
+
+- ↔️ __[Le serveur transmet la commande en cuisine]{.orange}__:
+    - Point d'entrée de l'API
+
+. . .
+
+- 🧑‍🍳 __[La cuisine prépare le plat]{.orange}__
+    - Le serveur (informatique) fait les traitements _ad hoc_
+
+. . .
+
+- 🍕 __[Vous recevez votre plat]{.orange}__
+    - Vous recevez une réponse au format `JSON`
+
+
+## Pourquoi les API ?
+
+- [_Praticité_]{.blue2} car permet de dissocier:
+    - Le __[client]{.orange}__: une interface web ({{< fa brands firefox >}}) ou un langage informatique ({{< fa brands python >}}, {{< fa brands r-project >}}, {{< fa brands js-square >}}...)
+    - Le __[serveur]{.orange}__: le moteur de calcul derrière
+
+. . .
+
+- [_Sobriété_]{.blue2}: permet l'accès à la donnée voulue sans parcourir tout un fichier
+
+. . .
+
+- [_Confidentialité_]{.blue2}: on peut mettre des droits d'accès à certaines données
+
+. . .
+
+- _[Unversalité]{.blue2}_: pas d'_a priori_ sur le mode d'accès
+
+## Les API de données
+
+<br>
+
+![](./images/serveur-modele-no-bg.png)
+
+
+## Les API de données
+
+- Plus de fichiers enregistrés manuellement
+    + [__Mise à jour assurée__]{.orange}  par le producteur
+    + [__Directement propagées__]{.orange} au consommateur de données
+    + Permet l'automatisation de scripts sans stockage local
+
+. . .
+
+- [__Contrat formel__]{.orange} avec un producteur de données
+    + Contrairement au _webscraping_!
+
+. . .
+
+- Permet de récupérer des [__données transformées complexes__]{.orange}
+    - Exemple: inférences de modèles 🤖
+
+
+# Concepts principaux
+
+## Structuration d'une requête
+
+Les requêtes prennent la forme d'__[URI]{.blue2}__:
+
+::: {style="text-align: left !important;"}
+
+$$
+\quad \underbrace{\text{https://api-adresse.data.gouv.fr}}_{\text{API root}}/\underbrace{\text{search}}_{\text{API endpoint}}
+$$
+
+
+$$
+\quad /?\underbrace{\text{q=88+avenue+verdier}}_{\text{main parameter}}\&\underbrace{\text{postcode=92120}}_{\text{additional parameter}}
+$$
+
+
+:::
+
+Auxquelles vont s'ajouter des [**_headers_**]{.blue2} (explication à venir)
+
+::: {.callout-note}
+[Démonstration interactive](https://inseefrlab.github.io/ssphub-ateliers/sessions/api.html)
+:::
+
+
+## Les requêtes HTTP
+
+* `GET`: récupérer des données depuis un serveur web (lecture d'une base de données...)
+* `POST`: envoyer des données au serveur (formulaires de mise à jour de données, etc.)
+* `Python` communique avec internet via le **_package_ `requests`** (`requests.get` et `requests.post`)
+
+
+## Les codes HTTP
+
+* Signification des codes HTTP
+    * 1xx : Informations
+    * 2xx : Succès
+    * 3xx : Redirections
+    * 4xx : Erreurs côté client
+    * 5xx : Erreurs côté serveur
+
+
+::: {.callout-note}
+## Codes à retenir
+
+Ceux à retenir sont : [__200__]{.blue2} (succès), [__400__]{.blue2} (requête mal structurée), [__401__]{.blue2} (authentification nonréussie), [__403__]{.blue2} (accès interdit), [__404__]{.blue2} (ressource demandée n'existe pas), [__503__]{.blue2} (le serveur n'est pas en capacité de répondre)
+
+:::
+
+
+## Les _swaggers_
+
+
+:::: {.columns}
+
+::: {.column width="56%"}
+
+* Format standardisé de documentation
+    * Généralement `${URL_ROOT}/docs`
+
+* Utilisation interactive:
+    * Génère des exemples `curl` (ligne de commande)
+
+:::
+
+::: {.column width="4%"}
+
+:::
+
+::: {.column width="36%"}
+
+![](https://fastapi.tiangolo.com/img/index/index-03-swagger-02.png)
+
+:::
+
+::::
+
+## Comment connaître les paramètres d'une API ?
+
+* _Swagger_ {{< iconify vscode-icons:file-type-swagger >}}
+
+. . .
+
+* Outils développement navigateur (<kbd>CTRL</kbd>+<kbd>MAJ</kbd>+<kbd>K</kbd> sur {{< fa brands firefox >}}):
+    * Onglet réseau {{< iconify uil:arrows-v >}}
+
+. . .
+
+* [`Postman`](https://www.postman.com/) {{< iconify vscode-icons:file-type-postman >}}
+
+. . .
+
+* Extension  {{< iconify vscode-icons:file-type-vscode >}} [REST Client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client)
+
+
+
+# Partie pratique
+
+## Les requêtes [`GET`]{.blue2}
+```{=html}
+<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=SSPHub-Atelier-API&version=2.2.7&s3=region-ec97c721&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FInseeFrLab%2Fssphub-ateliers%2Frefs%2Fheads%2Fmain%2Finit%2Fapi.sh»&networking.user.enabled=true&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=SSPHub-Atelier-API&version=2.2.7&s3=region-ec97c721&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FInseeFrLab%2Fssphub-ateliers%2Frefs%2Fheads%2Fmain%2Finit%2Fapi.sh»&networking.user.enabled=true&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a>
+<a href="https://inseefrlab.github.io/ssphub-ateliers/sessions/api.ipynb" target="_blank" rel="noopener" data-original-href="https://inseefrlab.github.io/ssphub-ateliers/sessions/api.ipynb"><img src="https://custom-icon-badges.demolab.com/badge/download--notebook-black.svg?logo=download-cloud&logoSource=feather" alt="Onyxia"></a><br>
+```
+
+
+* Requête la plus commune
+
+. . .
+
+* Transformation en objet {{< fa brands python >}} (`JSON` -> `dict`) est naturelle
+
+. . .
+
+* Formattage dépend de chaque API (lire la doc ! 👮)
+
+. . .
+
+* Retravailler l'_output_ peut être lourd
+
+
+```{.python}
+import requests
+adresse = "88 avenue verdier"
+url_ban_example = (
+    f"https://api-adresse.data.gouv.fr/search/"
+    f"?q={adresse.replace(" ", "+")}&postcode=92120"
+)
+requests.get(url_ban_example).json()
+```
+
+
+
+## Les requêtes `POST`
+```{=html}
+<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=SSPHub-Atelier-API&version=2.2.7&s3=region-ec97c721&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FInseeFrLab%2Fssphub-ateliers%2Frefs%2Fheads%2Fmain%2Finit%2Fapi.sh»&networking.user.enabled=true&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=SSPHub-Atelier-API&version=2.2.7&s3=region-ec97c721&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FInseeFrLab%2Fssphub-ateliers%2Frefs%2Fheads%2Fmain%2Finit%2Fapi.sh»&networking.user.enabled=true&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a>
+<a href="https://inseefrlab.github.io/ssphub-ateliers/sessions/api.ipynb" target="_blank" rel="noopener" data-original-href="https://inseefrlab.github.io/ssphub-ateliers/sessions/api.ipynb"><img src="https://custom-icon-badges.demolab.com/badge/download--notebook-black.svg?logo=download-cloud&logoSource=feather" alt="Onyxia"></a><br>
+```
+
+* Envoyer des données utiles à l'API
+
+* Plus complexe mais `Requests` est flexible
+    + Transformer les objets {{< fa brands python >}} en _input_ de l'API
+
+```{.python}
+params = {
+    "columns": ["adresse", "Nom_commune"],
+    "citycode": "DEPCOM",
+    "result_columns": ["result_score", "latitude", "longitude"],
+}
+
+response = requests.post(
+        "https://api-adresse.data.gouv.fr/search/csv/",
+        data=params,
+        files={"data": open(csv_file, "rb")},
+    )
+```
+
+
+# Gestion des secrets
+
+## Bonnes pratiques
+
+[__La doctrine générale__]{.orange}
+
+![](https://inseefrlab.github.io/formation-bonnes-pratiques-git-R/slides/img/environment_clean.png)
+
+_Source: [Cours de l'ENSAE de mise en production](https://ensae-reproductibilite.github.io/)_
+
+## Bonnes pratiques pour les secrets
+```{=html}
+<a href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=SSPHub-Atelier-API&version=2.2.7&s3=region-ec97c721&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FInseeFrLab%2Fssphub-ateliers%2Frefs%2Fheads%2Fmain%2Finit%2Fapi.sh»&networking.user.enabled=true&autoLaunch=true" target="_blank" rel="noopener" data-original-href="https://datalab.sspcloud.fr/launcher/ide/vscode-python?name=SSPHub-Atelier-API&version=2.2.7&s3=region-ec97c721&init.personalInit=«https%3A%2F%2Fraw.githubusercontent.com%2FInseeFrLab%2Fssphub-ateliers%2Frefs%2Fheads%2Fmain%2Finit%2Fapi.sh»&networking.user.enabled=true&autoLaunch=true"><img src="https://custom-icon-badges.demolab.com/badge/SSP%20Cloud-Lancer_avec_VSCode-blue?logo=vsc&amp;logoColor=white" alt="Onyxia"></a>
+<a href="https://inseefrlab.github.io/ssphub-ateliers/sessions/api.ipynb" target="_blank" rel="noopener" data-original-href="https://inseefrlab.github.io/ssphub-ateliers/sessions/api.ipynb"><img src="https://custom-icon-badges.demolab.com/badge/download--notebook-black.svg?logo=download-cloud&logoSource=feather" alt="Onyxia"></a><br>
+```
+
+
+
+1. __[Boite de dialogue]{.orange}__ via [`getpass`](https://docs.python.org/3/library/getpass.html) (application interactive uniquement)
+
+. . .
+
+2. __[Variables d'environnement]{.orange}__:
+    * Dans un [fichier `.env`]{.blue2} (non committé!) lu avec [`dotenv`](https://pypi.org/project/python-dotenv/)
+    * Dans les [secrets]{.blue2} de l'intégration continue (cf. [doc {{< fa brands github >}}](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions))
+
+```{.python}
+from dotenv import load_dotenv
+load_dotenv()
+token = os.getenv("MON_PETIT_JETON")
+```
+
+
+## Conclusion
+
+* [__Pratique__]{.orange} pour récupérer des __[données ponctuelles]{.orange}__:
+    * Afficher un __[nombre limité d'enregistrements]{.blue2}__ dans une application
+    * Récupérer des données issues d'un [__processus de transformation complexe__]{.blue2}
+
+. . .
+
+* __[Limitées]{.orange}__ en termes de [__volumétrie__]{.blue2} ou __[stabilité d'accès]{.blue2}__
+
+. . .
+
+* __[Code très adhérant]{.orange}__ à une API et un langage client
+
+
+## Des questions ?
+
+![](https://minio.lab.sspcloud.fr/lgaliana/generative-art/pythonds/kid.png)
+

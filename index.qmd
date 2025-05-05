@@ -1,0 +1,325 @@
+---
+title: Challenges and insights in developing and evaluating RAG assistants
+subtitle: |
+  **[Generative AI and Official Statistics Workshop 2025]{.orange}**
+author:
+  - name: "[Lino Galiana](https://www.linogaliana.fr/)"
+    affiliations:
+        - name: "Insee"
+date: 2025-05-12
+date-format: short
+slide-number: true
+footer: |
+  **Generative AI and Official Statistics Workshop 2025**
+lang: fr-FR
+slide-tone: false
+format:
+  onyxia-revealjs
+from: markdown+emoji
+bibliography: biblio.bib
+---
+
+## Initial example
+
+![](/img/answer_no_rag.png)
+
+Is this a good answer ? Hard to tell
+
+## Initial example
+
+:::: {.columns}
+
+::: {.column width="50%"}
+![Answer from ChatGPT](/img/answer_rag_chatgpt.png)
+:::
+
+::: {.column width="50%"}
+![Answer from Google](/img/answer_google.png)
+:::
+
+::::
+
+Both answers are better: precise, contextual
+
+## Why RAG ?
+
+- Retrieval-Augmented Generation (RAG) combines:
+  - **Information retrieval** from a knowledge base
+  - **Text generation** using a Large Language Model (LLM) with contextualized information
+
+
+::: {.callout-tip}
+## Objective:
+
+- Produce accurate information (no hallucination)
+- Produce verifiable information (source citation)
+- Propose up-to-date answer
+- Interpretation of the meaning of the question, unlike traditional text queries based on bags of words
+:::
+
+## Why doing that ? {.smaller}
+
+- Asking Google is great but user needs to have good keywords
+  - Assume user knows what she wants...
+  - And have some literacy
+
+. . .
+
+- LLMs are more and more used as search engine
+  - How can we best structure information in our website for the response to be relevant ?
+
+. . .
+
+- We have 20+ years of experience in understanding how Google works,
+  - We also need to understand how LLM works
+  - Experimenting on RAG is a good way for that
+
+
+# Typical RAG pipeline
+
+## Typical RAG pipeline
+
+![](/img/drawio/statbot-archi.png)
+
+## Challenge {.smaller}
+
+<br>
+
+:::: {.columns}
+
+::: {.column .incremental width="60%"}
+- How should we parse the documents ?
+- How to handle tables?
+- How to handle documents metadata that can be useful ?
+- Should we split the pages ?
+- How long should each chunk be ?
+- How should we chunk ?
+- ...
+:::
+
+::: {.column width="40%"}
+![](/img/drawio/statbot-archi-1-parsing.png)
+:::
+
+::::
+
+
+## Challenge {.smaller}
+
+:::: {.columns}
+
+::: {.column .incremental width="60%"}
+- Which embedding should I choose ?
+- Is the best performing embedding in MTEB relevant for my use case ?
+- Which backend should I use for embedding ? (VLLM, Ollama...)
+- Which vector database should I use ? (ChromaDB, QDrant...)
+- How to make my vectordatabase always available to my RAG in production ?
+- Should I only use semantic search or hybrid search ?
+- How many documents should I retrieve ?
+- Should I rerank ? How ?
+- ...
+:::
+
+::: {.column width="40%"}
+![](/img/drawio/statbot-archi-2-embedding.png)
+:::
+
+::::
+
+
+## Typical RAG pipeline: challenge {.smaller}
+
+:::: {.columns}
+
+::: {.column .incremental width="60%"}
+- Which generative model should I use ?
+- How to prompt it to ensure context citation and avoid hallucinations ?
+- How to prompt it if there are different use cases that are covered ?
+- Which backend should I use ?
+- How to expose him to clients ? Should I expose him first to happy fews?
+- ...
+:::
+
+::: {.column width="40%"}
+![](/img/drawio/statbot-archi-3-generative.png)
+:::
+
+::::
+
+## RAG is hard
+
+::: {.center}
+{{< iconify exploding-head size=10x >}}
+:::
+
+## [<del>RAG is hard</del>]{.blue2} RAG needs evaluation {.smaller}
+
+- Evaluation challenges:
+  - Is the retrieved context relevant?
+  - Is the generation faithful to the context?
+  - Is the answer useful to end users (e.g. analysts, statisticians)?
+
+. . .
+
+- Generic metrics are not that useful
+    - Better to define use case related objectives
+    - Adapt pipelines to that end
+
+. . .
+
+- Existing off the shelves frameworks show limitations
+    - To build good RAG, need to go on details
+
+# Evaluation
+
+## Many metrics exist
+
+```{mermaid}
+flowchart TD
+    A[RAG Evaluation] --> B[Retrieval Quality]
+    A --> C[Generation Quality]
+    A --> D[End-to-End Evaluation]
+    B --> E[Precision, Recall, F-score,<br> NDCG, MRR...]
+    C --> F[Accuracy, Faithfulness,<br> Relevance, ROUGE/BLEU/METEOR,<br> Hallucination...]
+    D --> G[Helpfulness, Consistency,<br> Conciseness,<br> Latency, Satisfaction...]
+```
+
+_An attempt to classify RAG metrics_
+
+## They are not that much helpful
+
+:::: {.columns}
+
+::: {.column .nonincremental width="60%"}
+
+* RAG quality depends on so many dimensions...
+* ... we understood Kierkegaard's vertigo of freedom concept
+
+:::
+
+::: {.column width="40%"}
+
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg/800px-Edvard_Munch%2C_1893%2C_The_Scream%2C_oil%2C_tempera_and_pastel_on_cardboard%2C_91_x_73_cm%2C_National_Gallery_of_Norway.jpg)
+
+:::
+
+::::
+
+## We need to know what we want
+
+* Best way to go forward : read Hamel Husain blog
+    * Notably: @husain2024evals and @husain2025fieldguide posts
+    * Pragmatic approach
+
+. . .
+
+* Better to start with limited set of metrics
+
+![_"The kind of dashboard that foreshadows failure." [@husain2025fieldguide](https://hamel.dev/blog/posts/field-guide/)_](https://hamel.dev/blog/posts/field-guide/images/dashboard.png){width=50% fig-align="center"}
+
+
+## What do we want ?
+
+* __[No hallucination !]{.orange}__
+  * _How many invented references or facts ?_
+  * [__Hallucination rate__]{.blue2}
+
+* __[Retrieve relevant content]{.orange}__:
+  * _Does the retriever find the relevant page/document for a given question ?_
+  * [__Topk retrieval__]{.blue2}
+
+* Have a __[useful companion]{.orange}__ to official statistics
+  * Given the sources, is the answer satisfactory ?
+  * [__Satisfaction rate__]{.blue2}
+
+
+
+
+# How can we evaluate ?
+
+## 1. Collect expert level annotations
+#### To challenge retrieval before any product launch
+
+* Once again @husain2024evals is right:
+  * Many frameworks can create tricky questions using LLM (RAGAS, Giskard...)
+  * But nothing works better than starting from questions and answers in a spreadsheet
+
+* Collect existing questions from [insee.fr](https://www.insee.fr/fr/accueil) website (e.g. [here](https://www.insee.fr/fr/statistiques/4481456#en-six-questions)) or write original ones
+
+## 1. Collect expert level annotations
+#### To challenge retrieval before any product launch
+
+![](/img/qr_eval_statbot.png)
+
+## 1. Collect expert level annotations {.smaller}
+#### To challenge retrieval before any product launch
+
+* Helped us to iterate over a "satisfying" strategy regarding parsing and chunking
+
+* Have insights regarding embedding choice
+
+* Need medium sized chunks
+   *  Even if we have long context models
+   *  Not more than 1500 tokens to avoid lost in the middle
+
+* Cast the tables aside
+  * Hard to chunk, hard to interpret without
+  * Might loose precise information (e.g. a statistic in a table)
+  * Prioretizing text content.
+
+::: {.callout-note}
+This dataset can be latter on used for any parametric change in our RAG pipeline
+:::
+
+## 2. Collect user feedbacks {.smaller}
+<h4>To ensure we satisfy user needs</h4>
+
+* Having an interface gamifies the evaluation process...
+    + ... which can help collecting evaluation
+
+. . .
+
+* We want users to give honest feedbacks on different dimensions:
+    * Sources used, quality of the answer
+    * Free form to understand for manual inspection to understand what does not work
+    * Simple feedback (👍️/👎️) to track satisfaction rate
+
+. . .
+
+* We need a good satisfaction rate before A/B testing !
+
+# Results
+
+## Evaluation
+
+TO DO
+
+
+## Conclusion
+
+- RAG quality depends first (and IMO mostly) on how documents are parsed and processed
+  - Back to information retrieval problem !
+  - See @barnett2024sevenfailurepointsengineering
+
+. . .
+
+- Technical choices are important for feasability
+  - Other choices (e.g. reranking, generative models...) can be handled afterwards
+
+. . .
+
+- Lot of the content on RAG focuses on short documents...
+  - Or long documents with a highly standardised structure that chunks naturally.
+
+
+## Conclusion
+
+- `llms.txt` ([llmstxt.org/](https://llmstxt.org/)): proposal to normalize website content for LLM ingestion
+    - Markdown based approach
+    - [Some big actors](https://directory.llmstxt.cloud/) that have adopted that norm
+
+- After SEO, we will have GEO (Generative Engine Optimization)
+    - We want an easy access to reliable information
+
+
+## References
