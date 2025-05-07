@@ -19,6 +19,7 @@ from: markdown+emoji
 bibliography: biblio.bib
 ---
 
+
 ## Initial example
 
 ![](/img/answer_no_rag.png)
