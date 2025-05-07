@@ -1,0 +1,156 @@
+[
+  {
+    "objectID": "index.html#initial-example",
+    "href": "index.html#initial-example",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Initial example",
+    "text": "Initial example\n\nIs this a good answer ? Hard to tell"
+  },
+  {
+    "objectID": "index.html#initial-example-1",
+    "href": "index.html#initial-example-1",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Initial example",
+    "text": "Initial example\n\n\n\n\n\nAnswer from ChatGPT\n\n\n\n\n\n\nAnswer from Google\n\n\n\nBoth answers are better: precise, contextual"
+  },
+  {
+    "objectID": "index.html#why-rag",
+    "href": "index.html#why-rag",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Why RAG ?",
+    "text": "Why RAG ?\n\nRetrieval-Augmented Generation (RAG) combines:\n\nInformation retrieval from a knowledge base\nText generation using a Large Language Model (LLM) with contextualized information\n\n\n\n\n\n\n\n\nObjective:\n\n\n\nProduce accurate information (no hallucination)\nProduce verifiable information (source citation)\nPropose up-to-date answer\nInterpretation of the meaning of the question, unlike traditional text queries based on bags of words"
+  },
+  {
+    "objectID": "index.html#why-doing-that",
+    "href": "index.html#why-doing-that",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Why doing that ?",
+    "text": "Why doing that ?\n\nAsking Google is great but user needs to have good keywords\n\nAssume user knows what she wants…\nAnd have some literacy\n\n\n\n\nLLMs are more and more used as search engine\n\nHow can we best structure information in our website for the response to be relevant ?\n\n\n\n\n\nWe have 20+ years of experience in understanding how Google works,\n\nWe also need to understand how LLM works\nExperimenting on RAG is a good way for that"
+  },
+  {
+    "objectID": "index.html#typical-rag-pipeline-1",
+    "href": "index.html#typical-rag-pipeline-1",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Typical RAG pipeline",
+    "text": "Typical RAG pipeline"
+  },
+  {
+    "objectID": "index.html#challenge",
+    "href": "index.html#challenge",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Challenge",
+    "text": "Challenge\n\n\n\n\nHow should we parse the documents ?\nHow to handle tables?\nHow to handle documents metadata that can be useful ?\nShould we split the pages ?\nHow long should each chunk be ?\nHow should we chunk ?\n…"
+  },
+  {
+    "objectID": "index.html#challenge-1",
+    "href": "index.html#challenge-1",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Challenge",
+    "text": "Challenge\n\n\n\nWhich embedding should I choose ?\nIs the best performing embedding in MTEB relevant for my use case ?\nWhich backend should I use for embedding ? (VLLM, Ollama…)\nWhich vector database should I use ? (ChromaDB, QDrant…)\nHow to make my vectordatabase always available to my RAG in production ?\nShould I only use semantic search or hybrid search ?\nHow many documents should I retrieve ?\nShould I rerank ? How ?\n…"
+  },
+  {
+    "objectID": "index.html#typical-rag-pipeline-challenge",
+    "href": "index.html#typical-rag-pipeline-challenge",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Typical RAG pipeline: challenge",
+    "text": "Typical RAG pipeline: challenge\n\n\n\nWhich generative model should I use ?\nHow to prompt it to ensure context citation and avoid hallucinations ?\nHow to prompt it if there are different use cases that are covered ?\nWhich backend should I use ?\nHow to expose him to clients ? Should I expose him first to happy fews?\n…"
+  },
+  {
+    "objectID": "index.html#rag-is-hard",
+    "href": "index.html#rag-is-hard",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "RAG is hard",
+    "text": "RAG is hard"
+  },
+  {
+    "objectID": "index.html#rag-is-hard-rag-needs-evaluation",
+    "href": "index.html#rag-is-hard-rag-needs-evaluation",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "RAG is hard RAG needs evaluation",
+    "text": "RAG is hard RAG needs evaluation\n\nEvaluation challenges:\n\nIs the retrieved context relevant?\nIs the generation faithful to the context?\nIs the answer useful to end users (e.g. analysts, statisticians)?\n\n\n\n\nGeneric metrics are not that useful\n\nBetter to define use case related objectives\nAdapt pipelines to that end\n\n\n\n\n\nExisting off the shelves frameworks show limitations\n\nTo build good RAG, need to go on details"
+  },
+  {
+    "objectID": "index.html#many-metrics-exist",
+    "href": "index.html#many-metrics-exist",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Many metrics exist",
+    "text": "Many metrics exist\n\n\n\n\n\nflowchart TD\n    A[RAG Evaluation] --&gt; B[Retrieval Quality]\n    A --&gt; C[Generation Quality]\n    A --&gt; D[End-to-End Evaluation]\n    B --&gt; E[Precision, Recall, F-score,&lt;br&gt; NDCG, MRR...]\n    C --&gt; F[Accuracy, Faithfulness,&lt;br&gt; Relevance, ROUGE/BLEU/METEOR,&lt;br&gt; Hallucination...]\n    D --&gt; G[Helpfulness, Consistency,&lt;br&gt; Conciseness,&lt;br&gt; Latency, Satisfaction...]\n\n\n\n\n\n\nAn attempt to classify RAG metrics"
+  },
+  {
+    "objectID": "index.html#they-are-not-that-much-helpful",
+    "href": "index.html#they-are-not-that-much-helpful",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "They are not that much helpful",
+    "text": "They are not that much helpful\n\n\n\nRAG quality depends on so many dimensions…\n… we understood Kierkegaard’s vertigo of freedom concept"
+  },
+  {
+    "objectID": "index.html#we-need-to-know-what-we-want",
+    "href": "index.html#we-need-to-know-what-we-want",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "We need to know what we want",
+    "text": "We need to know what we want\n\nBest way to go forward : read Hamel Husain blog\n\nNotably: Husain (2024) and Husain (2025) posts\nPragmatic approach\n\n\n\n\nBetter to start with limited set of metrics\n\n\n\n\n“The kind of dashboard that foreshadows failure.” Husain (2025)"
+  },
+  {
+    "objectID": "index.html#what-do-we-want",
+    "href": "index.html#what-do-we-want",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "What do we want ?",
+    "text": "What do we want ?\n\nNo hallucination !\n\nHow many invented references or facts ?\nHallucination rate\n\nRetrieve relevant content:\n\nDoes the retriever find the relevant page/document for a given question ?\nTopk retrieval\n\nHave a useful companion to official statistics\n\nGiven the sources, is the answer satisfactory ?\nSatisfaction rate"
+  },
+  {
+    "objectID": "index.html#collect-expert-level-annotations",
+    "href": "index.html#collect-expert-level-annotations",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "1. Collect expert level annotations",
+    "text": "1. Collect expert level annotations\nTo challenge retrieval before any product launch\n\nOnce again Husain (2024) is right:\n\nMany frameworks can create tricky questions using LLM (RAGAS, Giskard…)\nBut nothing works better than starting from questions and answers in a spreadsheet\n\nCollect existing questions from insee.fr website (e.g. here) or write original ones"
+  },
+  {
+    "objectID": "index.html#collect-expert-level-annotations-1",
+    "href": "index.html#collect-expert-level-annotations-1",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "1. Collect expert level annotations",
+    "text": "1. Collect expert level annotations\nTo challenge retrieval before any product launch"
+  },
+  {
+    "objectID": "index.html#collect-expert-level-annotations-2",
+    "href": "index.html#collect-expert-level-annotations-2",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "1. Collect expert level annotations",
+    "text": "1. Collect expert level annotations\nTo challenge retrieval before any product launch\n\nHelped us to iterate over a “satisfying” strategy regarding parsing and chunking\nHave insights regarding embedding choice\nNeed medium sized chunks\n\nEven if we have long context models\nNot more than 1500 tokens to avoid lost in the middle\n\nCast the tables aside\n\nHard to chunk, hard to interpret without\nMight loose precise information (e.g. a statistic in a table)\nPrioretizing text content.\n\n\n\n\n\n\n\n\nNote\n\n\nThis dataset can be latter on used for any parametric change in our RAG pipeline"
+  },
+  {
+    "objectID": "index.html#collect-user-feedbacks",
+    "href": "index.html#collect-user-feedbacks",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "2. Collect user feedbacks",
+    "text": "2. Collect user feedbacks\n\nTo ensure we satisfy user needs\n\n\nHaving an interface gamifies the evaluation process…\n\n… which can help collecting evaluation\n\n\n\n\nWe want users to give honest feedbacks on different dimensions:\n\nSources used, quality of the answer\nFree form to understand for manual inspection to understand what does not work\nSimple feedback (👍️/👎️) to track satisfaction rate\n\n\n\n\n\nWe need a good satisfaction rate before A/B testing !"
+  },
+  {
+    "objectID": "index.html#evaluation-1",
+    "href": "index.html#evaluation-1",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Evaluation",
+    "text": "Evaluation\nTO DO"
+  },
+  {
+    "objectID": "index.html#conclusion",
+    "href": "index.html#conclusion",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nRAG quality depends first (and IMO mostly) on how documents are parsed and processed\n\nBack to information retrieval problem !\nSee Barnett et al. (2024)\n\n\n\n\nTechnical choices are important for feasability\n\nOther choices (e.g. reranking, generative models…) can be handled afterwards\n\n\n\n\n\nLot of the content on RAG focuses on short documents…\n\nOr long documents with a highly standardised structure that chunks naturally."
+  },
+  {
+    "objectID": "index.html#conclusion-1",
+    "href": "index.html#conclusion-1",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nllms.txt (llmstxt.org/): proposal to normalize website content for LLM ingestion\n\nMarkdown based approach\nSome big actors that have adopted that norm\n\nAfter SEO, we will have GEO (Generative Engine Optimization)\n\nWe want an easy access to reliable information"
+  },
+  {
+    "objectID": "index.html#references",
+    "href": "index.html#references",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "References",
+    "text": "References\n\n\n\n\nBarnett, Scott, Stefanus Kurniawan, Srikanth Thudumu, Zach Brannelly, et Mohamed Abdelrazek. 2024. « Seven Failure Points When Engineering a Retrieval Augmented Generation System ». https://arxiv.org/abs/2401.05856.\n\n\nHusain, Hamel. 2024. « Your AI Product Needs Evals ». https://hamel.dev/blog/posts/evals/.\n\n\n———. 2025. « A Field Guide to Rapidly Improving AI Products ». https://hamel.dev/blog/posts/field-guide/."
+  }
+]
