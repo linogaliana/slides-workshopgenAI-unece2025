@@ -60,13 +60,13 @@ Both answers are better: precise, contextual
 
 ## Why doing that ? {.smaller}
 
-- Asking Google is great but user needs to have good keywords
+- Asking Google is great but user needs to have __[good keywords]{.orange}__
   - Assume user knows what she wants...
   - And have some literacy
 
 . . .
 
-- LLMs are more and more used as search engine
+- [__LLMs__]{.orange} are more and more used as [__search engine__]{.orange}
   - How can we best structure information in our website for the response to be relevant ?
 
 . . .
@@ -82,7 +82,7 @@ Both answers are better: precise, contextual
 
 ![](/img/drawio/statbot-archi.png)
 
-## Challenge {.smaller}
+## Challenge {.smaller .nonincremental}
 
 <br>
 
@@ -104,8 +104,9 @@ Both answers are better: precise, contextual
 
 ::::
 
+## Challenge {.smaller .nonincremental}
 
-## Challenge {.smaller}
+
 
 :::: {.columns}
 
@@ -128,7 +129,7 @@ Both answers are better: precise, contextual
 ::::
 
 
-## Typical RAG pipeline: challenge {.smaller}
+## Challenge {.smaller .nonincremental}
 
 :::: {.columns}
 
@@ -168,7 +169,7 @@ Both answers are better: precise, contextual
 
 . . .
 
-- Existing off the shelves frameworks show limitations
+- Existing plug and play frameworks show limitations
     - To build good RAG, need to go on details
 
 # Evaluation
@@ -193,7 +194,7 @@ _An attempt to classify RAG metrics_
 
 ::: {.column .nonincremental width="60%"}
 
-* RAG quality depends on so many dimensions...
+* RAG  __[quality depends on so many dimensions]{.orange}__...
 * ... we understood Kierkegaard's vertigo of freedom concept
 
 :::
@@ -253,7 +254,7 @@ _An attempt to classify RAG metrics_
 . . .
 
 * Collected expert domain Q&A
-    * Small sample: 62 questions
+    * Small sample: [__62 questions__]{.orange}
     * More questions will come later
 
 ## Technical details
@@ -294,18 +295,18 @@ Collect existing questions from [insee.fr](https://www.insee.fr/fr/accueil) webs
 
 <h4>To challenge retrieval before any product launch</h4>
 
-* Helped us to iterate over a "satisfying" strategy regarding parsing and chunking
+* Helped us to iterate over a "satisfying" strategy regarding [__parsing and chunking__]{.orange}
     * Need medium sized chunks (around 1100 tokens)
-    *  Not more than 1500 tokens to avoid lost in the middle
+    * Not more than 1500 tokens to avoid [__lost in the middle__]{.blue2}
 
 . . .
 
-* Cast the tables aside
+* [__Cast the tables aside__]{.orange}
     * Hard to chunk, hard to interpret without
     * Prioretizing text content.
 
 ::: {.callout-note}
-This dataset can be latter on used for any parametric change in our RAG pipeline
+This dataset can be later on used for any parametric change in our RAG pipeline
 :::
 
 ## 2. Collect user feedbacks {.smaller}
@@ -316,18 +317,47 @@ This dataset can be latter on used for any parametric change in our RAG pipeline
 
 . . .
 
-* We want users to give honest feedbacks on different dimensions:
+* We want users to give honest feedbacks on [__different dimensions__]{.orange}:
     * Sources used, quality of the answer
     * Free form to understand for manual inspection to understand what does not work
     * Simple feedback (👍️/👎️) to track satisfaction rate
 
-. . .
+::: {.callout-tip}
+We need good satisfaction rates before A/B testing !
+:::
 
-* We need a good satisfaction rate before A/B testing !
+## Retriever quality
 
-## Our main specification
+* Helped monitor retriever quality
+* Helped understand problems in website parsing
 
-TO DO
+{{< include /img/observable/_retriever.qmd >}}
+
+
+## RAG behavior
+
+* Helped finding a satisfying prompt
+
+{{< include /img/observable/_hallucination.qmd >}}
+
+## First user feedbacks
+
+* First feedbacks are mostly positive :
+    * [__Streaming__]{.orange} is fast
+
+* Main negative feedbacks:
+    * Retriever gives [__outdated papers__]{.orange} (how to prioretize recent content?)
+
+
+::: {.callout-note}
+## RAG demo: [rag-insee-demo-unece.lab.sspcloud.fr](rag-insee-demo-unece.lab.sspcloud.fr)
+
+Easy to put into production thanks to:
+
+* Our modular approach (`Chroma` or `VLLM` APIs)
+* Our `Kubernetes` infrastructure [`SSPCloud`](https://www.sspcloud.fr/)
+
+:::
 
 ## Remaining challenges
 
@@ -340,28 +370,24 @@ TO DO
 
 ## Conclusion
 
-- RAG quality depends first (and IMO mostly) on how documents are parsed and processed
-  - Back to information retrieval problem !
+- RAG quality depends first (and IMO mostly) on how documents are __[parsed and processed]{.orange}__
+  - [__Back to information retrieval problem__]{.blue2} !
   - See @barnett2024sevenfailurepointsengineering
+  - Lot of RAG resources focused on short documents...
 
 . . .
 
-- Technical choices are important for feasability
-  - Other choices (e.g. reranking, generative models...) can be handled afterwards
-
-. . .
-
-- Lot of the content on RAG focuses on short documents...
-  - Or long documents with a highly standardised structure that chunks naturally.
+- We struggled for a long time because of [__poor technical choices__]{.orange}
+  - Other choices (e.g. reranking, generative models...) can be handled after having a good pipeline
 
 
 ## Conclusion
 
-- `llms.txt` ([llmstxt.org/](https://llmstxt.org/)): proposal to normalize website content for LLM ingestion
+- `llms.xt` ([llmstxt.org/](https://llmstxt.org/)): proposal to normalize website content for LLM ingestion
     - Markdown based approach
-    - [Some big actors](https://directory.llmstxt.cloud/) that have adopted that norm
+    - [Some big actors](https://directory.llmstxt.cloud/) have adopted that norm
 
-- After SEO, we will have GEO (Generative Engine Optimization)
+- After SEO, [__we will have GEO__]{.orange} (Generative Engine Optimization)
     - We want an easy access to reliable information
 
 
