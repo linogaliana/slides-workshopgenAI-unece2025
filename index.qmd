@@ -234,39 +234,75 @@ _An attempt to classify RAG metrics_
   * [__Satisfaction rate__]{.blue2}
 
 
+# How did we evaluate ?
 
+## Methodology
 
-# How can we evaluate ?
+* Around 60k pages from [insee.fr](https://www.insee.fr/fr/accueil)
+
+. . .
+
+* Evaluating RAG on different dimensions
+
+. . .
+
+* Main model used:
+    + Embedding: `BAAI/bge-multilingual-gemma2`
+    + Generation: `mistralai/Mistral-Small-24B-Instruct-2501`
+
+. . .
+
+* Collected expert domain Q&A
+    * Small sample: 62 questions
+    * More questions will come later
+
+## Technical details
+
++ 2 `VLLMs` instance (OpenAI API compatible endpoints) in backend
+    + Running on Nvidia H100 GPU
++ `ChromaDB` as vector database
++ `Langchain` for document handling
++ `Streamlit` for front end user interface
+
+::: {.callout-note}
+
+This is a quite demanding _pipeline_ :
+
+* Embedding and generation instances must be available at each user query
+:::
 
 ## 1. Collect expert level annotations
-#### To challenge retrieval before any product launch
+
+<h4>To challenge retrieval before any product launch</h4>
 
 * Once again @husain2024evals is right:
-  * Many frameworks can create tricky questions using LLM (RAGAS, Giskard...)
-  * But nothing works better than starting from questions and answers in a spreadsheet
+  * Many frameworks can create tricky questions using LLM ([`RAGAS`](https://docs.ragas.io/en/stable/), [`Giskard`](https://www.giskard.ai/)...)
+  * But nothing works better than starting from [__expert questions and answers in a spreadsheet__]{.orange}
 
-* Collect existing questions from [insee.fr](https://www.insee.fr/fr/accueil) website (e.g. [here](https://www.insee.fr/fr/statistiques/4481456#en-six-questions)) or write original ones
+
+::: {.callout-tip}
+Collect existing questions from [insee.fr](https://www.insee.fr/fr/accueil) website (e.g. [here](https://www.insee.fr/fr/statistiques/4481456#en-six-questions)) or write original ones
+:::
 
 ## 1. Collect expert level annotations
-#### To challenge retrieval before any product launch
+
+<h4>To challenge retrieval before any product launch</h4>
 
 ![](/img/qr_eval_statbot.png)
 
 ## 1. Collect expert level annotations {.smaller}
-#### To challenge retrieval before any product launch
+
+<h4>To challenge retrieval before any product launch</h4>
 
 * Helped us to iterate over a "satisfying" strategy regarding parsing and chunking
+    * Need medium sized chunks (around 1100 tokens)
+    *  Not more than 1500 tokens to avoid lost in the middle
 
-* Have insights regarding embedding choice
-
-* Need medium sized chunks
-   *  Even if we have long context models
-   *  Not more than 1500 tokens to avoid lost in the middle
+. . .
 
 * Cast the tables aside
-  * Hard to chunk, hard to interpret without
-  * Might loose precise information (e.g. a statistic in a table)
-  * Prioretizing text content.
+    * Hard to chunk, hard to interpret without
+    * Prioretizing text content.
 
 ::: {.callout-note}
 This dataset can be latter on used for any parametric change in our RAG pipeline
@@ -289,11 +325,17 @@ This dataset can be latter on used for any parametric change in our RAG pipeline
 
 * We need a good satisfaction rate before A/B testing !
 
-# Results
-
-## Evaluation
+## Our main specification
 
 TO DO
+
+## Remaining challenges
+
+* Need to prioritize recent content
+
+. . .
+
+* Need to prioritize national statistics unless question about specific area
 
 
 ## Conclusion
