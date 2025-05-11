@@ -1,0 +1,81 @@
+
+```{ojs}
+//| echo: false
+topk = [
+  {top: 1, value: 21.31, version: "Complete set\nof questions"},
+  {top: 2, value: 34.43, version: "Complete set\nof questions"},
+  {top: 3, value: 37.70, version: "Complete set\nof questions"},
+  {top: 4, value: 40.98, version: "Complete set\nof questions"},
+  {top: 5, value: 45.90, version: "Complete set\nof questions"},
+  {top: 6, value: 47.54, version: "Complete set\nof questions"},
+  {top: 7, value: 49.18, version: "Complete set\nof questions"},
+  {top: 8, value: 50.82, version: "Complete set\nof questions"},
+  {top: 9, value: 50.82, version: "Complete set\nof questions"},
+  {top: 10, value: 50.82, version: "Complete set\nof questions"},
+
+  {top: 1, value: 32.35, version: "Restricted to well\nparsed sections"},
+  {top: 2, value: 52.94, version: "Restricted to well\nparsed sections"},
+  {top: 3, value: 58.82, version: "Restricted to well\nparsed sections"},
+  {top: 4, value: 64.71, version: "Restricted to well\nparsed sections"},
+  {top: 5, value: 70.59, version: "Restricted to well\nparsed sections"},
+  {top: 6, value: 73.53, version: "Restricted to well\nparsed sections"},
+  {top: 7, value: 76.47, version: "Restricted to well\nparsed sections"},
+  {top: 8, value: 79.41, version: "Restricted to well\nparsed sections"},
+  {top: 9, value: 79.41, version: "Restricted to well\nparsed sections"},
+  {top: 10, value: 79.41, version: "Restricted to well\nparsed sections"}
+]
+```
+
+
+```{ojs}
+//| echo: false
+chart = Plot.plot({
+  y: {
+    domain: [0, 100],
+    grid: true,
+    label: "Share of answer that cite a correct document (%)"
+  },
+  x: {
+    label: "Number of retrieved documents",
+    type: "linear",
+  },
+  color: {
+    range: ["#4758AB", "#ff562c"]
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.line(topk, {
+      x: "top",
+      y: "value",
+      stroke: "version"
+    }),
+    Plot.dot(topk, {
+      x: "top",
+      y: "value",
+      stroke: "version",
+    }),
+    Plot.text(topk, Plot.selectLast({
+      x: "top",
+      y: "value",
+      z: "version",
+      text: "version",
+      textAnchor: "start",
+      dx: 4
+    }))
+  ],
+  width: 1100,
+  height: 400,
+  marginRight: 200,
+  style: {
+    fontWeight: "bold"
+  }
+})
+```
+
+
+
+```{ojs}
+html`<div class="custom">${chart}<style>
+.custom svg { font-size: 20px !important }
+`
+```

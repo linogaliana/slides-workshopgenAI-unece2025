@@ -1,0 +1,39 @@
+```{ojs}
+hallucination_data = [
+  {method: "RAG ✅️", value: 0.3145},
+  {method: "RAG ❌️", value: 78.33}
+]
+```
+
+```{ojs}
+chart2 = Plot.plot({
+  marks: [
+    Plot.barY(hallucination_data, {
+      x: "method",
+      y: "value",
+      fill: "#ff562c"
+    }),
+    Plot.text(hallucination_data, {
+      x: "method",
+      y: "value",
+      text: d => d.value.toFixed(1) + "%",
+      dy: -8,
+      fontWeight: "bold"
+    })
+  ],
+  y: {
+    domain: [0, 100],
+    label: "Share of answers with at least one invented reference (%)"
+  },
+  width: 550,
+  height: 400,
+  fontWeight: "bold"
+})
+```
+
+
+```{ojs}
+html`<div class="custom">${chart2}<style>
+.custom svg { font-size: 20px !important }
+`
+```
