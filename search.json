@@ -98,25 +98,39 @@
     "text": "What do we want ?\n\nNo hallucination !\n\nHow many invented references or facts ?\nHallucination rate\n\nRetrieve relevant content:\n\nDoes the retriever find the relevant page/document for a given question ?\nTopk retrieval\n\nHave a useful companion to official statistics\n\nGiven the sources, is the answer satisfactory ?\nSatisfaction rate"
   },
   {
+    "objectID": "index.html#methodology",
+    "href": "index.html#methodology",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Methodology",
+    "text": "Methodology\n\nAround 60k pages from insee.fr\n\n\n\nEvaluating RAG on different dimensions\n\n\n\n\nMain model used:\n\nEmbedding: BAAI/bge-multilingual-gemma2\nGeneration: mistralai/Mistral-Small-24B-Instruct-2501\n\n\n\n\n\nCollected expert domain Q&A\n\nSmall sample: 62 questions\nMore questions will come later"
+  },
+  {
+    "objectID": "index.html#technical-details",
+    "href": "index.html#technical-details",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Technical details",
+    "text": "Technical details\n\n2 VLLMs instance (OpenAI API compatible endpoints) in backend\n\nRunning on Nvidia H100 GPU\n\nChromaDB as vector database\nLangchain for document handling\nStreamlit for front end user interface\n\n\n\n\n\n\n\nNote\n\n\nThis is a quite demanding pipeline :\n\nEmbedding and generation instances must be available at each user query"
+  },
+  {
     "objectID": "index.html#collect-expert-level-annotations",
     "href": "index.html#collect-expert-level-annotations",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
     "section": "1. Collect expert level annotations",
-    "text": "1. Collect expert level annotations\nTo challenge retrieval before any product launch\n\nOnce again Husain (2024) is right:\n\nMany frameworks can create tricky questions using LLM (RAGAS, Giskard…)\nBut nothing works better than starting from questions and answers in a spreadsheet\n\nCollect existing questions from insee.fr website (e.g. here) or write original ones"
+    "text": "1. Collect expert level annotations\n\nTo challenge retrieval before any product launch\n\n\nOnce again Husain (2024) is right:\n\nMany frameworks can create tricky questions using LLM (RAGAS, Giskard…)\nBut nothing works better than starting from expert questions and answers in a spreadsheet\n\n\n\n\n\n\n\n\nAstuce\n\n\nCollect existing questions from insee.fr website (e.g. here) or write original ones"
   },
   {
     "objectID": "index.html#collect-expert-level-annotations-1",
     "href": "index.html#collect-expert-level-annotations-1",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
     "section": "1. Collect expert level annotations",
-    "text": "1. Collect expert level annotations\nTo challenge retrieval before any product launch"
+    "text": "1. Collect expert level annotations\n\nTo challenge retrieval before any product launch"
   },
   {
     "objectID": "index.html#collect-expert-level-annotations-2",
     "href": "index.html#collect-expert-level-annotations-2",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
     "section": "1. Collect expert level annotations",
-    "text": "1. Collect expert level annotations\nTo challenge retrieval before any product launch\n\nHelped us to iterate over a “satisfying” strategy regarding parsing and chunking\nHave insights regarding embedding choice\nNeed medium sized chunks\n\nEven if we have long context models\nNot more than 1500 tokens to avoid lost in the middle\n\nCast the tables aside\n\nHard to chunk, hard to interpret without\nMight loose precise information (e.g. a statistic in a table)\nPrioretizing text content.\n\n\n\n\n\n\n\n\nNote\n\n\nThis dataset can be latter on used for any parametric change in our RAG pipeline"
+    "text": "1. Collect expert level annotations\n\nTo challenge retrieval before any product launch\n\n\nHelped us to iterate over a “satisfying” strategy regarding parsing and chunking\n\nNeed medium sized chunks (around 1100 tokens)\nNot more than 1500 tokens to avoid lost in the middle\n\n\n\n\nCast the tables aside\n\nHard to chunk, hard to interpret without\nPrioretizing text content.\n\n\n\n\n\n\n\n\nNote\n\n\nThis dataset can be latter on used for any parametric change in our RAG pipeline"
   },
   {
     "objectID": "index.html#collect-user-feedbacks",
@@ -126,11 +140,18 @@
     "text": "2. Collect user feedbacks\n\nTo ensure we satisfy user needs\n\n\nHaving an interface gamifies the evaluation process…\n\n… which can help collecting evaluation\n\n\n\n\nWe want users to give honest feedbacks on different dimensions:\n\nSources used, quality of the answer\nFree form to understand for manual inspection to understand what does not work\nSimple feedback (👍️/👎️) to track satisfaction rate\n\n\n\n\n\nWe need a good satisfaction rate before A/B testing !"
   },
   {
-    "objectID": "index.html#evaluation-1",
-    "href": "index.html#evaluation-1",
+    "objectID": "index.html#our-main-specification",
+    "href": "index.html#our-main-specification",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
-    "section": "Evaluation",
-    "text": "Evaluation\nTO DO"
+    "section": "Our main specification",
+    "text": "Our main specification\nTO DO"
+  },
+  {
+    "objectID": "index.html#remaining-challenges",
+    "href": "index.html#remaining-challenges",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "Remaining challenges",
+    "text": "Remaining challenges\n\nNeed to prioritize recent content\n\n\n\nNeed to prioritize national statistics unless question about specific area"
   },
   {
     "objectID": "index.html#conclusion",

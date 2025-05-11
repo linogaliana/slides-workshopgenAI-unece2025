@@ -428,42 +428,117 @@
 </ul>
 </section></section>
 <section>
-<section id="how-can-we-evaluate" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
-<h1>How can we evaluate ?</h1>
+<section id="how-did-we-evaluate" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
+<h1>How did we evaluate ?</h1>
 
+</section>
+<section id="methodology" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Methodology</h2>
+<ul>
+<li>Around 60k pages from <a href="https://www.insee.fr/fr/accueil">insee.fr</a></li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Evaluating RAG on different dimensions</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Main model used:
+<ul>
+<li>Embedding: <code>BAAI/bge-multilingual-gemma2</code></li>
+<li>Generation: <code>mistralai/Mistral-Small-24B-Instruct-2501</code></li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>Collected expert domain Q&amp;A
+<ul>
+<li>Small sample: 62 questions</li>
+<li>More questions will come later</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="technical-details" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Technical details</h2>
+<ul>
+<li>2 <code>VLLMs</code> instance (OpenAI API compatible endpoints) in backend
+<ul>
+<li>Running on Nvidia H100 GPU</li>
+</ul></li>
+<li><code>ChromaDB</code> as vector database</li>
+<li><code>Langchain</code> for document handling</li>
+<li><code>Streamlit</code> for front end user interface</li>
+</ul>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Note</strong></p>
+</div>
+<div class="callout-content">
+<p>This is a quite demanding <em>pipeline</em> :</p>
+<ul>
+<li>Embedding and generation instances must be available at each user query</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="collect-expert-level-annotations" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>1. Collect expert level annotations</h2>
-<h4 data-background-image="background.svg" data-background-size="contain" id="to-challenge-retrieval-before-any-product-launch">To challenge retrieval before any product launch</h4>
+<h4>
+To challenge retrieval before any product launch
+</h4>
 <ul>
 <li>Once again <span class="citation" data-cites="husain2024evals">Husain (<a href="#/references" role="doc-biblioref" onclick="">2024</a>)</span> is right:
 <ul>
-<li>Many frameworks can create tricky questions using LLM (RAGAS, Giskard…)</li>
-<li>But nothing works better than starting from questions and answers in a spreadsheet</li>
+<li>Many frameworks can create tricky questions using LLM (<a href="https://docs.ragas.io/en/stable/"><code>RAGAS</code></a>, <a href="https://www.giskard.ai/"><code>Giskard</code></a>…)</li>
+<li>But nothing works better than starting from <span class="orange"><strong>expert questions and answers in a spreadsheet</strong></span></li>
 </ul></li>
-<li>Collect existing questions from <a href="https://www.insee.fr/fr/accueil">insee.fr</a> website (e.g.&nbsp;<a href="https://www.insee.fr/fr/statistiques/4481456#en-six-questions">here</a>) or write original ones</li>
 </ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Astuce</strong></p>
+</div>
+<div class="callout-content">
+<p>Collect existing questions from <a href="https://www.insee.fr/fr/accueil">insee.fr</a> website (e.g.&nbsp;<a href="https://www.insee.fr/fr/statistiques/4481456#en-six-questions">here</a>) or write original ones</p>
+</div>
+</div>
+</div>
 </section>
 <section id="collect-expert-level-annotations-1" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>1. Collect expert level annotations</h2>
-<h4 data-background-image="background.svg" data-background-size="contain" id="to-challenge-retrieval-before-any-product-launch-1">To challenge retrieval before any product launch</h4>
+<h4>
+To challenge retrieval before any product launch
+</h4>
 
 <img data-src="./img/qr_eval_statbot.png" class="r-stretch"></section>
 <section id="collect-expert-level-annotations-2" class="slide level2 smaller" data-background-image="background.svg" data-background-size="contain">
 <h2>1. Collect expert level annotations</h2>
-<h4 data-background-image="background.svg" data-background-size="contain" id="to-challenge-retrieval-before-any-product-launch-2">To challenge retrieval before any product launch</h4>
+<h4>
+To challenge retrieval before any product launch
+</h4>
 <ul>
-<li><p>Helped us to iterate over a “satisfying” strategy regarding parsing and chunking</p></li>
-<li><p>Have insights regarding embedding choice</p></li>
-<li><p>Need medium sized chunks</p>
+<li>Helped us to iterate over a “satisfying” strategy regarding parsing and chunking
 <ul>
-<li>Even if we have long context models</li>
+<li>Need medium sized chunks (around 1100 tokens)</li>
 <li>Not more than 1500 tokens to avoid lost in the middle</li>
 </ul></li>
-<li><p>Cast the tables aside</p>
+</ul>
+<div class="fragment">
+<ul>
+<li>Cast the tables aside
 <ul>
 <li>Hard to chunk, hard to interpret without</li>
-<li>Might loose precise information (e.g.&nbsp;a statistic in a table)</li>
 <li>Prioretizing text content.</li>
 </ul></li>
 </ul>
@@ -477,6 +552,7 @@
 </div>
 <div class="callout-content">
 <p>This dataset can be latter on used for any parametric change in our RAG pipeline</p>
+</div>
 </div>
 </div>
 </div>
@@ -507,15 +583,21 @@ To ensure we satisfy user needs
 <li>We need a good satisfaction rate before A/B testing !</li>
 </ul>
 </div>
-</section></section>
-<section>
-<section id="results" class="title-slide slide level1 center" data-background-image="background.svg" data-background-size="contain">
-<h1>Results</h1>
-
 </section>
-<section id="evaluation-1" class="slide level2" data-background-image="background.svg" data-background-size="contain">
-<h2>Evaluation</h2>
+<section id="our-main-specification" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Our main specification</h2>
 <p>TO DO</p>
+</section>
+<section id="remaining-challenges" class="slide level2" data-background-image="background.svg" data-background-size="contain">
+<h2>Remaining challenges</h2>
+<ul>
+<li>Need to prioritize recent content</li>
+</ul>
+<div class="fragment">
+<ul>
+<li>Need to prioritize national statistics unless question about specific area</li>
+</ul>
+</div>
 </section>
 <section id="conclusion" class="slide level2" data-background-image="background.svg" data-background-size="contain">
 <h2>Conclusion</h2>
