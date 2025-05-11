@@ -49,11 +49,11 @@
     "text": "Challenge\n\n\n\nWhich embedding should I choose ?\nIs the best performing embedding in MTEB relevant for my use case ?\nWhich backend should I use for embedding ? (VLLM, Ollama…)\nWhich vector database should I use ? (ChromaDB, QDrant…)\nHow to make my vectordatabase always available to my RAG in production ?\nShould I only use semantic search or hybrid search ?\nHow many documents should I retrieve ?\nShould I rerank ? How ?\n…"
   },
   {
-    "objectID": "index.html#typical-rag-pipeline-challenge",
-    "href": "index.html#typical-rag-pipeline-challenge",
+    "objectID": "index.html#challenge-2",
+    "href": "index.html#challenge-2",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
-    "section": "Typical RAG pipeline: challenge",
-    "text": "Typical RAG pipeline: challenge\n\n\n\nWhich generative model should I use ?\nHow to prompt it to ensure context citation and avoid hallucinations ?\nHow to prompt it if there are different use cases that are covered ?\nWhich backend should I use ?\nHow to expose him to clients ? Should I expose him first to happy fews?\n…"
+    "section": "Challenge",
+    "text": "Challenge\n\n\n\nWhich generative model should I use ?\nHow to prompt it to ensure context citation and avoid hallucinations ?\nHow to prompt it if there are different use cases that are covered ?\nWhich backend should I use ?\nHow to expose him to clients ? Should I expose him first to happy fews?\n…"
   },
   {
     "objectID": "index.html#rag-is-hard",
@@ -67,7 +67,7 @@
     "href": "index.html#rag-is-hard-rag-needs-evaluation",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
     "section": "RAG is hard RAG needs evaluation",
-    "text": "RAG is hard RAG needs evaluation\n\nEvaluation challenges:\n\nIs the retrieved context relevant?\nIs the generation faithful to the context?\nIs the answer useful to end users (e.g. analysts, statisticians)?\n\n\n\n\nGeneric metrics are not that useful\n\nBetter to define use case related objectives\nAdapt pipelines to that end\n\n\n\n\n\nExisting off the shelves frameworks show limitations\n\nTo build good RAG, need to go on details"
+    "text": "RAG is hard RAG needs evaluation\n\nEvaluation challenges:\n\nIs the retrieved context relevant?\nIs the generation faithful to the context?\nIs the answer useful to end users (e.g. analysts, statisticians)?\n\n\n\n\nGeneric metrics are not that useful\n\nBetter to define use case related objectives\nAdapt pipelines to that end\n\n\n\n\n\nExisting plug and play frameworks show limitations\n\nTo build good RAG, need to go on details"
   },
   {
     "objectID": "index.html#many-metrics-exist",
@@ -130,21 +130,35 @@
     "href": "index.html#collect-expert-level-annotations-2",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
     "section": "1. Collect expert level annotations",
-    "text": "1. Collect expert level annotations\n\nTo challenge retrieval before any product launch\n\n\nHelped us to iterate over a “satisfying” strategy regarding parsing and chunking\n\nNeed medium sized chunks (around 1100 tokens)\nNot more than 1500 tokens to avoid lost in the middle\n\n\n\n\nCast the tables aside\n\nHard to chunk, hard to interpret without\nPrioretizing text content.\n\n\n\n\n\n\n\n\nNote\n\n\nThis dataset can be latter on used for any parametric change in our RAG pipeline"
+    "text": "1. Collect expert level annotations\n\nTo challenge retrieval before any product launch\n\n\nHelped us to iterate over a “satisfying” strategy regarding parsing and chunking\n\nNeed medium sized chunks (around 1100 tokens)\nNot more than 1500 tokens to avoid lost in the middle\n\n\n\n\nCast the tables aside\n\nHard to chunk, hard to interpret without\nPrioretizing text content.\n\n\n\n\n\n\n\n\nNote\n\n\nThis dataset can be later on used for any parametric change in our RAG pipeline"
   },
   {
     "objectID": "index.html#collect-user-feedbacks",
     "href": "index.html#collect-user-feedbacks",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
     "section": "2. Collect user feedbacks",
-    "text": "2. Collect user feedbacks\n\nTo ensure we satisfy user needs\n\n\nHaving an interface gamifies the evaluation process…\n\n… which can help collecting evaluation\n\n\n\n\nWe want users to give honest feedbacks on different dimensions:\n\nSources used, quality of the answer\nFree form to understand for manual inspection to understand what does not work\nSimple feedback (👍️/👎️) to track satisfaction rate\n\n\n\n\n\nWe need a good satisfaction rate before A/B testing !"
+    "text": "2. Collect user feedbacks\n\nTo ensure we satisfy user needs\n\n\nHaving an interface gamifies the evaluation process…\n\n… which can help collecting evaluation\n\n\n\n\nWe want users to give honest feedbacks on different dimensions:\n\nSources used, quality of the answer\nFree form to understand for manual inspection to understand what does not work\nSimple feedback (👍️/👎️) to track satisfaction rate\n\n\n\n\n\n\n\n\nAstuce\n\n\nWe need good satisfaction rates before A/B testing !"
   },
   {
-    "objectID": "index.html#our-main-specification",
-    "href": "index.html#our-main-specification",
+    "objectID": "index.html#retriever-quality",
+    "href": "index.html#retriever-quality",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
-    "section": "Our main specification",
-    "text": "Our main specification\nTO DO"
+    "section": "Retriever quality",
+    "text": "Retriever quality\n\nHelped monitor retriever quality\nHelped understand problems in website parsing\n\n\ntopk = [\n  {top: 1, value: 21.31, version: \"Complete set\\nof questions\"},\n  {top: 2, value: 34.43, version: \"Complete set\\nof questions\"},\n  {top: 3, value: 37.70, version: \"Complete set\\nof questions\"},\n  {top: 4, value: 40.98, version: \"Complete set\\nof questions\"},\n  {top: 5, value: 45.90, version: \"Complete set\\nof questions\"},\n  {top: 6, value: 47.54, version: \"Complete set\\nof questions\"},\n  {top: 7, value: 49.18, version: \"Complete set\\nof questions\"},\n  {top: 8, value: 50.82, version: \"Complete set\\nof questions\"},\n  {top: 9, value: 50.82, version: \"Complete set\\nof questions\"},\n  {top: 10, value: 50.82, version: \"Complete set\\nof questions\"},\n\n  {top: 1, value: 32.35, version: \"Restricted to well\\nparsed sections\"},\n  {top: 2, value: 52.94, version: \"Restricted to well\\nparsed sections\"},\n  {top: 3, value: 58.82, version: \"Restricted to well\\nparsed sections\"},\n  {top: 4, value: 64.71, version: \"Restricted to well\\nparsed sections\"},\n  {top: 5, value: 70.59, version: \"Restricted to well\\nparsed sections\"},\n  {top: 6, value: 73.53, version: \"Restricted to well\\nparsed sections\"},\n  {top: 7, value: 76.47, version: \"Restricted to well\\nparsed sections\"},\n  {top: 8, value: 79.41, version: \"Restricted to well\\nparsed sections\"},\n  {top: 9, value: 79.41, version: \"Restricted to well\\nparsed sections\"},\n  {top: 10, value: 79.41, version: \"Restricted to well\\nparsed sections\"}\n]\n\n\n\n\n\n\n\nchart = Plot.plot({\n  y: {\n    domain: [0, 100],\n    grid: true,\n    label: \"Share of answer that cite a correct document (%)\"\n  },\n  x: {\n    label: \"Number of retrieved documents\",\n    type: \"linear\",\n  },\n  color: {\n    range: [\"#4758AB\", \"#ff562c\"]\n  },\n  marks: [\n    Plot.ruleY([0]),\n    Plot.line(topk, {\n      x: \"top\",\n      y: \"value\",\n      stroke: \"version\"\n    }),\n    Plot.dot(topk, {\n      x: \"top\",\n      y: \"value\",\n      stroke: \"version\",\n    }),\n    Plot.text(topk, Plot.selectLast({\n      x: \"top\",\n      y: \"value\",\n      z: \"version\",\n      text: \"version\",\n      textAnchor: \"start\",\n      dx: 4\n    }))\n  ],\n  width: 1100,\n  height: 400,\n  marginRight: 200,\n  style: {\n    fontWeight: \"bold\"\n  }\n})\n\n\n\n\n\n\n\nhtml`&lt;div class=\"custom\"&gt;${chart}&lt;style&gt;\n.custom svg { font-size: 20px !important }\n`"
+  },
+  {
+    "objectID": "index.html#rag-behavior",
+    "href": "index.html#rag-behavior",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "RAG behavior",
+    "text": "RAG behavior\n\nHelped finding a satisfying prompt\n\n\nhallucination_data = [\n  {method: \"RAG ✅️\", value: 0.3145},\n  {method: \"RAG ❌️\", value: 78.33}\n]\n\n\n\n\n\n\n\nchart2 = Plot.plot({\n  marks: [\n    Plot.barY(hallucination_data, {\n      x: \"method\",\n      y: \"value\",\n      fill: \"#ff562c\"\n    }),\n    Plot.text(hallucination_data, {\n      x: \"method\",\n      y: \"value\",\n      text: d =&gt; d.value.toFixed(1) + \"%\",\n      dy: -8,\n      fontWeight: \"bold\"\n    })\n  ],\n  y: {\n    domain: [0, 100],\n    label: \"Share of answers with at least one invented reference (%)\"\n  },\n  width: 550,\n  height: 400,\n  fontWeight: \"bold\"\n})\n\n\n\n\n\n\n\nhtml`&lt;div class=\"custom\"&gt;${chart2}&lt;style&gt;\n.custom svg { font-size: 20px !important }\n`"
+  },
+  {
+    "objectID": "index.html#first-user-feedbacks",
+    "href": "index.html#first-user-feedbacks",
+    "title": "Challenges and insights in developing and evaluating RAG assistants",
+    "section": "First user feedbacks",
+    "text": "First user feedbacks\n\nFirst feedbacks are mostly positive :\n\nStreaming is fast\n\nMain negative feedbacks:\n\nRetriever gives outdated papers (how to prioretize recent content?)\n\n\n\n\n\n\n\n\nRAG demo: rag-insee-demo-unece.lab.sspcloud.fr\n\n\nEasy to put into production thanks to:\n\nOur modular approach (Chroma or VLLM APIs)\nOur Kubernetes infrastructure SSPCloud"
   },
   {
     "objectID": "index.html#remaining-challenges",
@@ -158,14 +172,14 @@
     "href": "index.html#conclusion",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
     "section": "Conclusion",
-    "text": "Conclusion\n\nRAG quality depends first (and IMO mostly) on how documents are parsed and processed\n\nBack to information retrieval problem !\nSee Barnett et al. (2024)\n\n\n\n\nTechnical choices are important for feasability\n\nOther choices (e.g. reranking, generative models…) can be handled afterwards\n\n\n\n\n\nLot of the content on RAG focuses on short documents…\n\nOr long documents with a highly standardised structure that chunks naturally."
+    "text": "Conclusion\n\nRAG quality depends first (and IMO mostly) on how documents are parsed and processed\n\nBack to information retrieval problem !\nSee Barnett et al. (2024)\nLot of RAG resources focused on short documents…\n\n\n\n\nWe struggled for a long time because of poor technical choices\n\nOther choices (e.g. reranking, generative models…) can be handled after having a good pipeline"
   },
   {
     "objectID": "index.html#conclusion-1",
     "href": "index.html#conclusion-1",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
     "section": "Conclusion",
-    "text": "Conclusion\n\nllms.txt (llmstxt.org/): proposal to normalize website content for LLM ingestion\n\nMarkdown based approach\nSome big actors that have adopted that norm\n\nAfter SEO, we will have GEO (Generative Engine Optimization)\n\nWe want an easy access to reliable information"
+    "text": "Conclusion\n\nllms.xt (llmstxt.org/): proposal to normalize website content for LLM ingestion\n\nMarkdown based approach\nSome big actors have adopted that norm\n\nAfter SEO, we will have GEO (Generative Engine Optimization)\n\nWe want an easy access to reliable information"
   },
   {
     "objectID": "index.html#references",
