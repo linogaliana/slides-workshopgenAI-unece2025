@@ -45,8 +45,8 @@ Both answers are better: precise, contextual
 ## Why RAG ?
 
 - Retrieval-Augmented Generation (RAG) combines:
-  - **Information retrieval** from a knowledge base
-  - **Text generation** using a Large Language Model (LLM) with contextualized information
+  - [**Information retrieval**]{.orange} from a knowledge base
+  - [**Text generation**]{.orange} using aLLM with contextualized information
 
 
 ::: {.callout-tip}
@@ -62,7 +62,7 @@ Both answers are better: precise, contextual
 
 - Asking Google is great but user needs to have __[good keywords]{.orange}__
   - Assume user knows what she wants...
-  - And have some literacy
+  - ... and have some literacy
 
 . . .
 
@@ -72,8 +72,8 @@ Both answers are better: precise, contextual
 . . .
 
 - We have 20+ years of experience in understanding how Google works,
-  - We also need to understand how LLM works
-  - Experimenting on RAG is a good way for that
+  - We also need to understand how LLMs work
+  - Experimenting RAG is a good way for that
 
 
 # Typical RAG pipeline
@@ -88,7 +88,7 @@ Both answers are better: precise, contextual
 
 :::: {.columns}
 
-::: {.column .incremental width="60%"}
+::: {.column .nonincremental width="60%"}
 - How should we parse the documents ?
 - How to handle tables?
 - How to handle documents metadata that can be useful ?
@@ -110,7 +110,7 @@ Both answers are better: precise, contextual
 
 :::: {.columns}
 
-::: {.column .incremental width="60%"}
+::: {.column .nonincremental width="60%"}
 - Which embedding should I choose ?
 - Is the best performing embedding in MTEB relevant for my use case ?
 - Which backend should I use for embedding ? (VLLM, Ollama...)
@@ -133,7 +133,7 @@ Both answers are better: precise, contextual
 
 :::: {.columns}
 
-::: {.column .incremental width="60%"}
+::: {.column .nonincremental width="60%"}
 - Which generative model should I use ?
 - How to prompt it to ensure context citation and avoid hallucinations ?
 - How to prompt it if there are different use cases that are covered ?
