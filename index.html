@@ -269,8 +269,8 @@
 <ul>
 <li>Retrieval-Augmented Generation (RAG) combines:
 <ul>
-<li><strong>Information retrieval</strong> from a knowledge base</li>
-<li><strong>Text generation</strong> using a Large Language Model (LLM) with contextualized information</li>
+<li><span class="orange"><strong>Information retrieval</strong></span> from a knowledge base</li>
+<li><span class="orange"><strong>Text generation</strong></span> using aLLM with contextualized information</li>
 </ul></li>
 </ul>
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -298,7 +298,7 @@
 <li>Asking Google is great but user needs to have <strong><span class="orange">good keywords</span></strong>
 <ul>
 <li>Assume user knows what she wants…</li>
-<li>And have some literacy</li>
+<li>… and have some literacy</li>
 </ul></li>
 </ul>
 <div class="fragment">
@@ -313,8 +313,8 @@
 <ul>
 <li>We have 20+ years of experience in understanding how Google works,
 <ul>
-<li>We also need to understand how LLM works</li>
-<li>Experimenting on RAG is a good way for that</li>
+<li>We also need to understand how LLMs work</li>
+<li>Experimenting RAG is a good way for that</li>
 </ul></li>
 </ul>
 </div>
@@ -334,13 +334,13 @@
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li class="fragment">How should we parse the documents ?</li>
-<li class="fragment">How to handle tables?</li>
-<li class="fragment">How to handle documents metadata that can be useful ?</li>
-<li class="fragment">Should we split the pages ?</li>
-<li class="fragment">How long should each chunk be ?</li>
-<li class="fragment">How should we chunk ?</li>
-<li class="fragment">…</li>
+<li>How should we parse the documents ?</li>
+<li>How to handle tables?</li>
+<li>How to handle documents metadata that can be useful ?</li>
+<li>Should we split the pages ?</li>
+<li>How long should each chunk be ?</li>
+<li>How should we chunk ?</li>
+<li>…</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="./img/drawio/statbot-archi-1-parsing.png"></p>
@@ -351,15 +351,15 @@
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li class="fragment">Which embedding should I choose ?</li>
-<li class="fragment">Is the best performing embedding in MTEB relevant for my use case ?</li>
-<li class="fragment">Which backend should I use for embedding ? (VLLM, Ollama…)</li>
-<li class="fragment">Which vector database should I use ? (ChromaDB, QDrant…)</li>
-<li class="fragment">How to make my vectordatabase always available to my RAG in production ?</li>
-<li class="fragment">Should I only use semantic search or hybrid search ?</li>
-<li class="fragment">How many documents should I retrieve ?</li>
-<li class="fragment">Should I rerank ? How ?</li>
-<li class="fragment">…</li>
+<li>Which embedding should I choose ?</li>
+<li>Is the best performing embedding in MTEB relevant for my use case ?</li>
+<li>Which backend should I use for embedding ? (VLLM, Ollama…)</li>
+<li>Which vector database should I use ? (ChromaDB, QDrant…)</li>
+<li>How to make my vectordatabase always available to my RAG in production ?</li>
+<li>Should I only use semantic search or hybrid search ?</li>
+<li>How many documents should I retrieve ?</li>
+<li>Should I rerank ? How ?</li>
+<li>…</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="./img/drawio/statbot-archi-2-embedding.png"></p>
@@ -370,12 +370,12 @@
 <div class="columns">
 <div class="column" style="width:60%;">
 <ul>
-<li class="fragment">Which generative model should I use ?</li>
-<li class="fragment">How to prompt it to ensure context citation and avoid hallucinations ?</li>
-<li class="fragment">How to prompt it if there are different use cases that are covered ?</li>
-<li class="fragment">Which backend should I use ?</li>
-<li class="fragment">How to expose him to clients ? Should I expose him first to happy fews?</li>
-<li class="fragment">…</li>
+<li>Which generative model should I use ?</li>
+<li>How to prompt it to ensure context citation and avoid hallucinations ?</li>
+<li>How to prompt it if there are different use cases that are covered ?</li>
+<li>Which backend should I use ?</li>
+<li>How to expose him to clients ? Should I expose him first to happy fews?</li>
+<li>…</li>
 </ul>
 </div><div class="column" style="width:40%;">
 <p><img data-src="./img/drawio/statbot-archi-3-generative.png"></p>

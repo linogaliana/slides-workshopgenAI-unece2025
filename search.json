@@ -18,14 +18,14 @@
     "href": "index.html#why-rag",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
     "section": "Why RAG ?",
-    "text": "Why RAG ?\n\nRetrieval-Augmented Generation (RAG) combines:\n\nInformation retrieval from a knowledge base\nText generation using a Large Language Model (LLM) with contextualized information\n\n\n\n\n\n\n\n\nObjective:\n\n\n\nProduce accurate information (no hallucination)\nProduce verifiable information (source citation)\nPropose up-to-date answer\nInterpretation of the meaning of the question, unlike traditional text queries based on bags of words"
+    "text": "Why RAG ?\n\nRetrieval-Augmented Generation (RAG) combines:\n\nInformation retrieval from a knowledge base\nText generation using aLLM with contextualized information\n\n\n\n\n\n\n\n\nObjective:\n\n\n\nProduce accurate information (no hallucination)\nProduce verifiable information (source citation)\nPropose up-to-date answer\nInterpretation of the meaning of the question, unlike traditional text queries based on bags of words"
   },
   {
     "objectID": "index.html#why-doing-that",
     "href": "index.html#why-doing-that",
     "title": "Challenges and insights in developing and evaluating RAG assistants",
     "section": "Why doing that ?",
-    "text": "Why doing that ?\n\nAsking Google is great but user needs to have good keywords\n\nAssume user knows what she wants…\nAnd have some literacy\n\n\n\n\nLLMs are more and more used as search engine\n\nHow can we best structure information in our website for the response to be relevant ?\n\n\n\n\n\nWe have 20+ years of experience in understanding how Google works,\n\nWe also need to understand how LLM works\nExperimenting on RAG is a good way for that"
+    "text": "Why doing that ?\n\nAsking Google is great but user needs to have good keywords\n\nAssume user knows what she wants…\n… and have some literacy\n\n\n\n\nLLMs are more and more used as search engine\n\nHow can we best structure information in our website for the response to be relevant ?\n\n\n\n\n\nWe have 20+ years of experience in understanding how Google works,\n\nWe also need to understand how LLMs work\nExperimenting RAG is a good way for that"
   },
   {
     "objectID": "index.html#typical-rag-pipeline-1",
