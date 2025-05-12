@@ -17,6 +17,7 @@ format:
   onyxia-revealjs
 from: markdown+emoji
 bibliography: biblio.bib
+lightbox: true
 ---
 
 
