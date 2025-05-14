@@ -351,7 +351,7 @@ We need good satisfaction rates before A/B testing !
 
 
 ::: {.callout-note}
-## RAG demo: [rag-insee-demo-unece.lab.sspcloud.fr](rag-insee-demo-unece.lab.sspcloud.fr)
+## RAG demo: [rag-insee-demo-unece.lab.sspcloud.fr](https://rag-insee-demo-unece.lab.sspcloud.fr)
 
 Easy to put into production thanks to:
 
